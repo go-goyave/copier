@@ -1793,4 +1793,15 @@ func TestCopyValuer(t *testing.T) {
 	if to.Value != from.Value.Value {
 		t.Errorf("to (%v) value should equal to from (%v) value", to.Value, from.Value.Value)
 	}
+
+	toStr := ""
+	fromStr := testValuer{Value: "override"}
+	err = copier.Copy(&toStr, fromStr)
+	if err != nil {
+		t.Errorf("should not error: %v", err)
+	}
+
+	if toStr != fromStr.Value {
+		t.Errorf("toStr (%v) value should equal to fromStr (%v) value", toStr, fromStr.Value)
+	}
 }
