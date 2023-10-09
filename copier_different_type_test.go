@@ -60,7 +60,7 @@ type TypeBaseStruct5 struct {
 	H string
 }
 
-type TypeSqlNullStruct6 struct {
+type TypeSQLNullStruct6 struct {
 	A sql.NullBool    `json:"a"`
 	B sql.NullByte    `json:"b"`
 	C sql.NullFloat64 `json:"c"`
@@ -78,7 +78,10 @@ func TestCopyDifferentFieldType(t *testing.T) {
 	}
 	ts2 := &TypeStruct2{}
 
-	copier.Copy(ts2, ts)
+	err := copier.Copy(ts2, ts)
+	if err != nil {
+		t.Error("should not error")
+	}
 
 	if ts2.Field2 != ts.Field2 || ts2.Field1 != 0 {
 		t.Errorf("Should be able to copy from ts to ts2")
@@ -92,7 +95,10 @@ func TestCopyDifferentTypeMethod(t *testing.T) {
 	}
 	ts4 := &TypeStruct4{}
 
-	copier.Copy(ts4, ts)
+	err := copier.Copy(ts4, ts)
+	if err != nil {
+		t.Error("should not error")
+	}
 
 	if ts4.Field2 != ts.Field2 || ts4.field1 != 0 {
 		t.Errorf("Should be able to copy from ts to ts4")
@@ -133,7 +139,10 @@ func TestAssignableType(t *testing.T) {
 
 	ts3 := &TypeStruct3{}
 
-	copier.CopyWithOption(&ts3, &ts, copier.Option{CaseSensitive: true})
+	err := copier.CopyWithOption(&ts3, &ts, copier.Option{CaseSensitive: true})
+	if err != nil {
+		t.Error("should not error")
+	}
 
 	if v, ok := ts3.Field1.(string); !ok {
 		t.Error("Assign to interface{} type did not succeed")
@@ -186,7 +195,7 @@ func TestCopyFromBaseToSqlNullWithOptionDeepCopy(t *testing.T) {
 		G: time.Now(),
 		H: "deep",
 	}
-	b := TypeSqlNullStruct6{}
+	b := TypeSQLNullStruct6{}
 
 	err := copier.CopyWithOption(&b, a, copier.Option{DeepCopy: true})
 	// 检查是否有错误

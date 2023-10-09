@@ -79,8 +79,14 @@ func TestIssue84(t *testing.T) {
 		destObj1 := Work{}
 		destObj2 := NotWork{}
 
-		copier.CopyWithOption(&destObj1, &workObj, copier.Option{IgnoreEmpty: true, DeepCopy: false})
+		err := copier.CopyWithOption(&destObj1, &workObj, copier.Option{IgnoreEmpty: true, DeepCopy: false})
+		if err != nil {
+			t.Error("should not error")
+		}
 
-		copier.CopyWithOption(&destObj2, &notWorkObj, copier.Option{IgnoreEmpty: true, DeepCopy: false})
+		err = copier.CopyWithOption(&destObj2, &notWorkObj, copier.Option{IgnoreEmpty: true, DeepCopy: false})
+		if err != nil {
+			t.Error("should not error")
+		}
 	})
 }

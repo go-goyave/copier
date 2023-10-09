@@ -11,7 +11,7 @@ func BenchmarkCopyStruct(b *testing.B) {
 	var fakeAge int32 = 12
 	user := User{Name: "Jinzhu", Nickname: "jinzhu", Age: 18, FakeAge: &fakeAge, Role: "Admin", Notes: []string{"hello world", "welcome"}, flags: []byte{'x'}}
 	for x := 0; x < b.N; x++ {
-		copier.Copy(&Employee{}, &user)
+		_ = copier.Copy(&Employee{}, &user)
 	}
 }
 
@@ -19,7 +19,7 @@ func BenchmarkCopyStructFields(b *testing.B) {
 	var fakeAge int32 = 12
 	user := User{Name: "Jinzhu", Nickname: "jinzhu", Age: 18, FakeAge: &fakeAge, Role: "Admin", Notes: []string{"hello world", "welcome"}, flags: []byte{'x'}}
 	for x := 0; x < b.N; x++ {
-		copier.Copy(&Employee{}, &user)
+		_ = copier.Copy(&Employee{}, &user)
 	}
 }
 
@@ -36,6 +36,7 @@ func BenchmarkNamaCopy(b *testing.B) {
 		}
 
 		for _, note := range user.Notes {
+			note := note
 			employee.Notes = append(employee.Notes, &note)
 		}
 		employee.Role(user.Role)
@@ -48,7 +49,7 @@ func BenchmarkJsonMarshalCopy(b *testing.B) {
 	for x := 0; x < b.N; x++ {
 		data, _ := json.Marshal(user)
 		var employee Employee
-		json.Unmarshal(data, &employee)
+		_ = json.Unmarshal(data, &employee)
 
 		employee.DoubleAge = user.DoubleAge()
 		employee.Role(user.Role)

@@ -35,15 +35,16 @@ const (
 
 // Option sets copy options
 type Option struct {
+	Converters []TypeConverter
+	// Custom field name mappings to copy values with different names in `fromValue` and `toValue` types.
+	// Examples can be found in `copier_field_name_mapping_test.go`.
+	FieldNameMapping []FieldNameMapping
+
 	// setting this value to true will ignore copying zero values of all the fields, including bools, as well as a
 	// struct having all it's fields set to their zero values respectively (see IsZero() in reflect/value.go)
 	IgnoreEmpty   bool
 	CaseSensitive bool
 	DeepCopy      bool
-	Converters    []TypeConverter
-	// Custom field name mappings to copy values with different names in `fromValue` and `toValue` types.
-	// Examples can be found in `copier_field_name_mapping_test.go`.
-	FieldNameMapping []FieldNameMapping
 }
 
 func (opt Option) converters() map[converterPair]TypeConverter {
@@ -421,7 +422,7 @@ func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) 
 					if toField := fieldByName(dest, destFieldName, opt.CaseSensitive); toField.IsValid() && toField.CanSet() {
 						values := fromMethod.Call([]reflect.Value{})
 						if len(values) >= 1 {
-							set(toField, values[0], opt.DeepCopy, converters)
+							_, _ = set(toField, values[0], opt.DeepCopy, converters)
 						}
 					}
 				}
@@ -467,6 +468,9 @@ func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) 
 		}
 
 		err = checkBitFlags(flgs.BitFlags)
+		if err != nil {
+			return err
+		}
 	}
 
 	return

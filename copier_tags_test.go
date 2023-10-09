@@ -29,7 +29,10 @@ type User2 struct {
 func TestCopyTagIgnore(t *testing.T) {
 	employee := EmployeeTags{ID: 100}
 	user := User1{Name: "Dexter Ledesma", DOB: "1 November, 1970", Address: "21 Jump Street", ID: 12345}
-	copier.Copy(&employee, user)
+	err := copier.Copy(&employee, user)
+	if err != nil {
+		t.Error("should not error")
+	}
 	if employee.ID == user.ID {
 		t.Error("Was not expected to copy IDs")
 	}
@@ -46,7 +49,7 @@ func TestCopyTagMust(t *testing.T) {
 			t.Error("Expected a panic.")
 		}
 	}()
-	copier.Copy(employee, user)
+	_ = copier.Copy(employee, user)
 }
 
 func TestCopyTagFieldName(t *testing.T) {
