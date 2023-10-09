@@ -7,6 +7,8 @@
 ## This fork's purpose
 
 - Added the `Valuer` interface.
+- Fixed bug: with the `DeepCopy` option to `true`, when the destination slice or map had a longer length than the source slice or map, the destination was not resized accordingly.
+- Add more test cases
 
 ## Features
 

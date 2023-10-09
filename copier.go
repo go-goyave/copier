@@ -183,9 +183,7 @@ func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) 
 			return ErrMapKeyNotMatch
 		}
 
-		if to.IsNil() {
-			to.Set(reflect.MakeMapWithSize(toType, from.Len()))
-		}
+		to.Set(reflect.MakeMapWithSize(toType, from.Len()))
 
 		for _, k := range from.MapKeys() {
 			toKey := indirect(reflect.New(toType.Key()))
@@ -245,6 +243,10 @@ func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) 
 						continue
 					}
 				}
+			}
+
+			if to.Len() > from.Len() {
+				to.SetLen(from.Len())
 			}
 			return
 		}
