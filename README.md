@@ -2,7 +2,7 @@
 
   I am a copier, I copy everything from one to another
 
-[![test status](https://github.com/go-goyave/copier/workflows/tests/badge.svg?branch=master "test status")](https://github.com/go-goyave/copier/actions)
+[![test status](https://github.com/go-goyave/copier/workflows/tests/badge.svg "test status")](https://github.com/go-goyave/copier/actions)
 
 ## This fork's purpose
 
