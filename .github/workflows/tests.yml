@@ -6,13 +6,9 @@ on:
       - "**"
     tags-ignore:
       - "v*.*.*"
-    branches-ignore:
-      - 'gh-pages'
   pull_request:
     branches:
       - "**"
-    branches-ignore:
-      - 'gh-pages'
       
 jobs:
   tests:
