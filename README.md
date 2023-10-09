@@ -148,4 +148,4 @@ You can help to make the project better, check out [http://gorm.io/contribute.ht
 
 ## License
 
-Released under the [MIT License](https://goyave.dev/copier/blob/master/License).
+Released under the [MIT License](https://github.com/go-goyave/copier/blob/master/License).
