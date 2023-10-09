@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jinzhu/copier"
+	"goyave.dev/copier"
 )
 
 func TestCopyWithTypeConverters(t *testing.T) {

@@ -2,7 +2,11 @@
 
   I am a copier, I copy everything from one to another
 
-[![test status](https://github.com/jinzhu/copier/workflows/tests/badge.svg?branch=master "test status")](https://github.com/jinzhu/copier/actions)
+[![test status](https://github.com/go-goyave/copier/workflows/tests/badge.svg?branch=master "test status")](https://github.com/go-goyave/copier/actions)
+
+## This fork's purpose
+
+- Added the `Valuer` interface.
 
 ## Features
 
@@ -23,7 +27,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/jinzhu/copier"
+	"goyave.dev/copier"
 )
 
 type Address struct{
@@ -140,14 +144,6 @@ copier.CopyWithOption(&to, &from, copier.Option{IgnoreEmpty: true, DeepCopy: tru
 
 You can help to make the project better, check out [http://gorm.io/contribute.html](http://gorm.io/contribute.html) for things you can do.
 
-# Author
-
-**jinzhu**
-
-* <http://github.com/jinzhu>
-* <wosmvp@gmail.com>
-* <http://twitter.com/zhangjinzhu>
-
 ## License
 
-Released under the [MIT License](https://github.com/jinzhu/copier/blob/master/License).
+Released under the [MIT License](https://goyave.dev/copier/blob/master/License).

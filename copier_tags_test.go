@@ -3,7 +3,7 @@ package copier_test
 import (
 	"testing"
 
-	"github.com/jinzhu/copier"
+	"goyave.dev/copier"
 )
 
 type EmployeeTags struct {

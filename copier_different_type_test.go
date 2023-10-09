@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jinzhu/copier"
+	"goyave.dev/copier"
 )
 
 type TypeStruct1 struct {
