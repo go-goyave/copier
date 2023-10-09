@@ -1805,3 +1805,19 @@ func TestCopyValuer(t *testing.T) {
 		t.Errorf("toStr (%v) value should equal to fromStr (%v) value", toStr, fromStr.Value)
 	}
 }
+
+func TestMapIncompatibleKeys(t *testing.T) {
+
+	to := map[struct{}]any{}
+
+	from := map[int64]any{}
+
+	err := copier.Copy(&to, from)
+	if err == nil {
+		t.Errorf("should error")
+		return
+	}
+	if !errors.Is(err, copier.ErrMapKeyNotMatch) {
+		t.Errorf("error should be ErrMapKeyNotMatch: %v", err)
+	}
+}
