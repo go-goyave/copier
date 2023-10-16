@@ -2,6 +2,8 @@ package copier_test
 
 import (
 	"database/sql"
+	"database/sql/driver"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"reflect"
@@ -1481,6 +1483,56 @@ func TestScanner(t *testing.T) {
 
 	if s.V.V != s2.V.V {
 		t.Errorf("Field V should be copied")
+	}
+}
+
+type Valuer struct {
+	A string
+	B int
+}
+
+func (v Valuer) Value() (driver.Value, error) {
+	return json.Marshal(v)
+}
+
+type ScannerString string
+
+func (s *ScannerString) Scan(v any) error {
+	switch val := v.(type) {
+	case string:
+		*s = ScannerString(val)
+		return nil
+	case []byte:
+		*s = ScannerString(val)
+		return nil
+	default:
+		return fmt.Errorf("ScannerString: cannot scan %#v", v)
+	}
+}
+
+func TestScannerWithValuerSrc(t *testing.T) {
+
+	from := &struct {
+		Field *Valuer
+	}{
+		Field: &Valuer{
+			A: "a",
+			B: 123,
+		},
+	}
+
+	to := &struct {
+		Field ScannerString
+	}{}
+
+	err := copier.Copy(to, from)
+	if err != nil {
+		t.Error("Should not raise error")
+	}
+
+	expected := ScannerString(`{"A":"a","B":123}`)
+	if to.Field != expected {
+		t.Errorf("to.Field expected %q but had %q", expected, to.Field)
 	}
 }
 

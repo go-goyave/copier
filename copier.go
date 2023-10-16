@@ -650,7 +650,17 @@ func set(to, from reflect.Value, deepCopy bool, converters map[converterPair]Typ
 		// `from` -> `to`
 		// string -> sql.NullString
 		// set `to` by invoking method Scan(`from`)
-		err := toScanner.Scan(from.Interface())
+
+		fromValue := from.Interface()
+		fromValuer, ok := driverValuer(from)
+		if ok {
+			v, err := fromValuer.Value()
+			if err == nil {
+				fromValue = v
+			}
+		}
+
+		err := toScanner.Scan(fromValue)
 		if err != nil {
 			return false, nil
 		}

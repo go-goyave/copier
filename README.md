@@ -8,6 +8,7 @@
 
 - Added the `Valuer` interface.
 - Fixed bug: with the `DeepCopy` option to `true`, when the destination slice or map had a longer length than the source slice or map, the destination was not resized accordingly.
+- Fixed bug: if the destination field implement `sql/driver.Scanner` and the source field implements `sql/driver.Valuer`, `Value()` was not called on the source field.
 - Add more test cases
 
 ## Features
