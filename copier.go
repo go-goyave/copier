@@ -463,6 +463,10 @@ func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) 
 					}
 				}
 			}
+
+			if from.Kind() == reflect.Slice && to.Len() > from.Len() {
+				to.SetLen(from.Len())
+			}
 		} else if initDest {
 			to.Set(dest)
 		}

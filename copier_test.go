@@ -1956,6 +1956,43 @@ func TestDeepCopyShortSliceIntoLongSlice(t *testing.T) {
 	}
 }
 
+func TestDeepCopyShortStructSliceIntoLongSlice(t *testing.T) {
+
+	type subStrctFrom struct {
+		Name string
+	}
+
+	type subStrctTo struct {
+		Name           string
+		SomeOtherField string // Make it so the struct is not directly convertible
+	}
+
+	type testStrctFrom struct {
+		Value []*subStrctFrom
+	}
+
+	type testStrctTo struct {
+		Value []*subStrctTo
+	}
+
+	to := testStrctTo{
+		Value: []*subStrctTo{{Name: "a"}, {Name: "b"}, {Name: "c"}, {Name: "d"}, {Name: "e"}},
+	}
+
+	from := testStrctFrom{
+		Value: []*subStrctFrom{{"f"}, {"g"}},
+	}
+
+	err := copier.CopyWithOption(&to, from, copier.Option{DeepCopy: true})
+	if err != nil {
+		t.Errorf("should not error: %v", err)
+	}
+
+	if len(to.Value) != len(from.Value) { // Values "c", "d", "e" are not expected
+		t.Errorf("to (%v) value len should equal to from (%v) value len", len(to.Value), len(from.Value))
+	}
+}
+
 func TestDeepCopyShortMapIntoLongMap(t *testing.T) {
 	type testStrct struct {
 		Value map[string]string
