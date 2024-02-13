@@ -207,7 +207,7 @@ func TestCopyWithConverterRaisingError(t *testing.T) {
 			{
 				SrcType: copier.String,
 				DstType: &ptrStrType,
-				Fn: func(src interface{}) (interface{}, error) {
+				Fn: func(_ interface{}) (interface{}, error) {
 					return nil, errors.New("src type not matching")
 				},
 			},
