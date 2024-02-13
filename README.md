@@ -3,6 +3,7 @@
   I am a copier, I copy everything from one to another
 
 [![test status](https://github.com/go-goyave/copier/workflows/tests/badge.svg "test status")](https://github.com/go-goyave/copier/actions)
+[![Coverage Status](https://coveralls.io/repos/github/go-goyave/copier/badge.svg?branch=master)](https://coveralls.io/github/go-goyave/copier?branch=master)
 
 ## This fork's purpose
 

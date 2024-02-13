@@ -29,12 +29,9 @@ jobs:
           go test -v -race -coverprofile=coverage.txt -covermode=atomic -coverpkg=./... ./...
           go tool cover -html=coverage.txt -o coverage.html
       - if: ${{ matrix.go == '1.22' }}
-        name: 'Upload Coverage artifact'
-        uses: actions/upload-artifact@v3
+        uses: shogo82148/actions-goveralls@v1
         with:
-          name: coverage
-          path: coverage.html
-          retention-days: 15
+          path-to-profile: coverage.txt
 
   lint:
     name: Lint
