@@ -128,7 +128,6 @@ func CopyWithOption(toValue interface{}, fromValue interface{}, opt Option) (err
 }
 
 func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) {
-
 	if fromCopyValuer, ok := fromValue.(Valuer); ok {
 		fromValue = fromCopyValuer.CopyValue()
 	}

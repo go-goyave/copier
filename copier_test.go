@@ -1511,7 +1511,6 @@ func (s *ScannerString) Scan(v any) error {
 }
 
 func TestScannerWithValuerSrc(t *testing.T) {
-
 	from := &struct {
 		Field *Valuer
 	}{
@@ -1827,7 +1826,6 @@ func TestDeepCopyAnonymousFieldTime(t *testing.T) {
 }
 
 func TestSqlNullFiled(t *testing.T) {
-
 	type sqlStruct struct {
 		MkExpiryDateStart sql.NullString
 		MkID              sql.NullInt64
@@ -1934,7 +1932,6 @@ func (v testValuer) CopyValue() interface{} {
 }
 
 func TestCopyValuer(t *testing.T) {
-
 	to := struct {
 		Value string
 	}{
@@ -1969,7 +1966,6 @@ func TestCopyValuer(t *testing.T) {
 }
 
 func TestMapIncompatibleKeys(t *testing.T) {
-
 	to := map[struct{}]any{}
 
 	from := map[int64]any{}
@@ -1985,7 +1981,6 @@ func TestMapIncompatibleKeys(t *testing.T) {
 }
 
 func TestDeepCopyShortSliceIntoLongSlice(t *testing.T) {
-
 	type testStrct struct {
 		Value []string
 	}
@@ -2009,7 +2004,6 @@ func TestDeepCopyShortSliceIntoLongSlice(t *testing.T) {
 }
 
 func TestDeepCopyShortStructSliceIntoLongSlice(t *testing.T) {
-
 	type subStrctFrom struct {
 		Name string
 	}

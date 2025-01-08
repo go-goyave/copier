@@ -36,7 +36,6 @@ func BenchmarkNamaCopy(b *testing.B) {
 		}
 
 		for _, note := range user.Notes {
-			note := note
 			employee.Notes = append(employee.Notes, &note)
 		}
 		employee.Role(user.Role)
