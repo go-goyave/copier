@@ -1136,7 +1136,7 @@ func TestAnonymousFields(t *testing.T) {
 			return
 		}
 
-		from.nested.A = "b"
+		from.A = "b"
 
 		if to.nested != nil {
 			t.Errorf("should be nil")
@@ -1164,9 +1164,9 @@ func TestAnonymousFields(t *testing.T) {
 			return
 		}
 
-		from.nested.A = "b"
+		from.A = "b"
 
-		if to.nested.A == from.nested.A {
+		if to.A == from.A {
 			t.Errorf("should be different")
 		}
 	})
@@ -1194,9 +1194,9 @@ func TestAnonymousFields(t *testing.T) {
 			return
 		}
 
-		from.Nested.A = "b"
+		from.A = "b"
 
-		if to.Nested.A != fieldValue {
+		if to.A != fieldValue {
 			t.Errorf("should not change")
 		}
 	})
@@ -1226,7 +1226,7 @@ func TestAnonymousFields(t *testing.T) {
 
 		from.A = "b"
 
-		if to.Nested.A != fieldValue {
+		if to.A != fieldValue {
 			t.Errorf("should not change")
 		}
 	})
@@ -1254,9 +1254,9 @@ func TestAnonymousFields(t *testing.T) {
 			return
 		}
 
-		from.Nested.A = "b"
+		from.A = "b"
 
-		if to.Nested.A != fieldValue {
+		if to.A != fieldValue {
 			t.Errorf("should not change")
 		}
 	})
@@ -1832,7 +1832,7 @@ func TestDeepCopyAnonymousFieldTime(t *testing.T) {
 	if err != nil {
 		t.Error("should not error")
 	}
-	if !from.Time.Equal(to.Time) {
+	if !from.Equal(to.Time) {
 		t.Errorf("to (%v) value should equal from (%v) value", to.Time, from.Time)
 	}
 }
