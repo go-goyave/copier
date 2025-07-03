@@ -64,9 +64,9 @@ func (opt Option) converters() map[converterPair]TypeConverter {
 }
 
 type TypeConverter struct {
-	SrcType interface{}
-	DstType interface{}
-	Fn      func(src interface{}) (dst interface{}, err error)
+	SrcType any
+	DstType any
+	Fn      func(src any) (dst any, err error)
 }
 
 type converterPair struct {
@@ -90,8 +90,8 @@ func (opt Option) fieldNameMapping() map[converterPair]FieldNameMapping {
 }
 
 type FieldNameMapping struct {
-	SrcType interface{}
-	DstType interface{}
+	SrcType any
+	DstType any
 	Mapping map[string]string
 }
 
@@ -101,7 +101,7 @@ type FieldNameMapping struct {
 // to format your type or convert it to another one before being copied.
 // This also enables conversion for types using generics, as you cannot use them with `TypeConverter`.
 type Valuer interface {
-	CopyValue() interface{}
+	CopyValue() any
 }
 
 // Tag Flags
@@ -118,16 +118,16 @@ type tagNameMapping struct {
 }
 
 // Copy copy things
-func Copy(toValue interface{}, fromValue interface{}) (err error) {
+func Copy(toValue any, fromValue any) (err error) {
 	return copier(toValue, fromValue, Option{})
 }
 
 // CopyWithOption copy with option
-func CopyWithOption(toValue interface{}, fromValue interface{}, opt Option) (err error) {
+func CopyWithOption(toValue any, fromValue any, opt Option) (err error) {
 	return copier(toValue, fromValue, opt)
 }
 
-func copier(toValue interface{}, fromValue interface{}, opt Option) (err error) {
+func copier(toValue any, fromValue any, opt Option) (err error) {
 	if fromCopyValuer, ok := fromValue.(Valuer); ok {
 		fromValue = fromCopyValuer.CopyValue()
 	}

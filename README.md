@@ -44,7 +44,7 @@ type Address struct{
 // you can implement this interface so the returned value will be used instead. It can also be used
 // to format your type or convert it to another one before being copied.
 // This also enables conversion for types using generics, as you cannot use them with `TypeConverter`.
-func (a Address) CopyValue() interface{} {
+func (a Address) CopyValue() any {
 	return fmt.Sprintf("%s, %s", a.Street, a.City)
 }
 

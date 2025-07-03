@@ -23,7 +23,7 @@ func newOptWithConverter() copier.Option {
 			{
 				SrcType: A{},
 				DstType: B{},
-				Fn: func(_ interface{}) (interface{}, error) {
+				Fn: func(_ any) (any, error) {
 					return copied, nil
 				},
 			},

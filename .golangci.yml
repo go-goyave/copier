@@ -22,6 +22,10 @@ linters:
       locale: US
     staticcheck:
       checks: ["all", "-QF1001"]
+    revive:
+      rules:
+        - name: use-any
+          disabled: false
   exclusions:
     generated: strict
     rules:
